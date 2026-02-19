@@ -14,7 +14,7 @@ const getTvSafePlugins = (plugins = []) =>
 
     // `useFrameworks: "static"` causes RNFirebase non-modular-header failures on tvOS.
     delete iosOptions.useFrameworks;
-    const existingExtraPods = Array.isArray(options.extraPods) ? options.extraPods : [];
+    const existingExtraPods = Array.isArray(iosOptions.extraPods) ? iosOptions.extraPods : [];
     const hasGoogleUtilitiesModularHeaders = existingExtraPods.some(
       (pod) => pod?.name === "GoogleUtilities"
     );
@@ -24,7 +24,7 @@ const getTvSafePlugins = (plugins = []) =>
       existingExtraPods.push({ name: "GoogleUtilities", modular_headers: true });
     }
 
-    options.extraPods = existingExtraPods;
+    iosOptions.extraPods = existingExtraPods;
 
     if (Object.keys(iosOptions).length > 0) {
       options.ios = iosOptions;
